@@ -1,0 +1,6 @@
+C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\NewDurnit\bin\Debug\NewDurnit.dll
+C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\NewDurnit\bin\Debug\NewDurnit.pdb
+C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\NewDurnit\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\NewDurnit\obj\Debug\NewDurnit.dll
+C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\NewDurnit\obj\Debug\NewDurnit.pdb
+C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\NewDurnit\obj\Debug\NewDurnit.csprojResolveAssemblyReference.cache
