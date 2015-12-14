@@ -7,3 +7,12 @@ C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\
 C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\DummyStartupApp\obj\Debug\DummyStartupApp.exe
 C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\DummyStartupApp\obj\Debug\DummyStartupApp.pdb
 C:\Users\Elijah Segura\Documents\Visual Studio 2013\Projects\Personal\NewDurnit\DummyStartupApp\obj\Debug\DummyStartupApp.csprojResolveAssemblyReference.cache
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\bin\Debug\DummyStartupApp.exe.config
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\bin\Debug\DummyStartupApp.exe
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\bin\Debug\DummyStartupApp.pdb
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\bin\Debug\NewDurnit.dll
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\bin\Debug\Newtonsoft.Json.dll
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\bin\Debug\NewDurnit.pdb
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\obj\Debug\DummyStartupApp.csprojResolveAssemblyReference.cache
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\obj\Debug\DummyStartupApp.exe
+C:\_\src\Blake\school\NewDurnit\NewDurnit\DummyStartupApp\obj\Debug\DummyStartupApp.pdb
