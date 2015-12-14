@@ -54,7 +54,7 @@
 
     myApp.controller('myCtrl', function ($scope, $http) {
 
-        $http.get("http://www.w3schools.com/angular/customers.php")
+        $http.get("http://localhost:27516/Files")
                 .then(function (response) {
                     $scope.files = response.data.records;
                 });
