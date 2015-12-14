@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="filemanager.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <meta charset="UTF-8">
+    <title>NewDurnit File Manager</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <h1>Manage your files!</h1>
+
+    <div>
+        <select ng-model='selectedFile' ng-options='file.Name for file in files'></select>
+        <button ng-click="add()">add</button>
+    </div>
+
+    <div>
+        <input type="file" id="file" name="file" />
+        <br>
+        <button ng-click="add()">Add</button>
+        <p>{{data}}</p>
+    </div>
+
+    <!--<div ng-app="myApp" ng-controller="myCtrl">-->
+    <!--First Name: <input type="text" ng-model="firstName"><br>-->
+    <!--Last Name: <input type="text" ng-model="lastName"><br>-->
+    <!--<br>-->
+    <!--Full Name: {{firstName + " " + lastName}}-->
+    <!--</div>-->
+
+    <script>
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('myCtrl', function ($scope, $http) {
+
+        $http.get("http://www.w3schools.com/angular/customers.php")
+                .then(function (response) {
+                    $scope.files = response.data.records;
+                });
+
+        //$scope.files = [{name:"pic.jpg", loc:"c:/tmp/pic.jpg"},{name:"song.mp3", loc:"c:/tmp/song.mp3"},{name:"movie.avi", loc:"c:/tmp/movie.avi"}];
+
+        uploadUrl = "http://localhost:27516/api/files/post"
+        $scope.data = 'none';
+        $scope.add = function () {
+            var f = document.getElementById('file').files[0],
+                    r = new FileReader();
+            r.onloadend = function (e) {
+                $scope.data = e.target.result;
+            }
+            r.readAsBinaryString(f);
+
+            $http.post(uploadUrl, r, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+
+                    .success(function(){
+                        alert('success');
+                    })
+
+                    .error(function(){
+                        alert('error');
+                    });
+        }
+
+//        $scope.add=function() {
+//           // $scope.selectedFile = $scope.files.name;
+//            alert('you selected ' + $scope.selectedFile.Name);
+//        }
+
+    })
+    </script>
+</body>
+</html>

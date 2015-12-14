@@ -10,3 +10,9 @@ C:\_\src\Blake\school\NewDurnit\NewDurnit\NewDurnit\bin\Debug\Newtonsoft.Json.dl
 C:\_\src\Blake\school\NewDurnit\NewDurnit\NewDurnit\obj\Debug\NewDurnit.csprojResolveAssemblyReference.cache
 C:\_\src\Blake\school\NewDurnit\NewDurnit\NewDurnit\obj\Debug\NewDurnit.dll
 C:\_\src\Blake\school\NewDurnit\NewDurnit\NewDurnit\obj\Debug\NewDurnit.pdb
+C:\Users\Matthew\Documents\Visual Studio 2015\Projects\NewDurnit\NewDurnit\NewDurnit\bin\Debug\NewDurnit.dll
+C:\Users\Matthew\Documents\Visual Studio 2015\Projects\NewDurnit\NewDurnit\NewDurnit\bin\Debug\NewDurnit.pdb
+C:\Users\Matthew\Documents\Visual Studio 2015\Projects\NewDurnit\NewDurnit\NewDurnit\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Matthew\Documents\Visual Studio 2015\Projects\NewDurnit\NewDurnit\NewDurnit\obj\Debug\NewDurnit.csprojResolveAssemblyReference.cache
+C:\Users\Matthew\Documents\Visual Studio 2015\Projects\NewDurnit\NewDurnit\NewDurnit\obj\Debug\NewDurnit.dll
+C:\Users\Matthew\Documents\Visual Studio 2015\Projects\NewDurnit\NewDurnit\NewDurnit\obj\Debug\NewDurnit.pdb
