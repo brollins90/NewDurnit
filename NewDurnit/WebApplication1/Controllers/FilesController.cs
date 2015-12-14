@@ -1,54 +1,75 @@
-﻿using NewDurnit;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-
-namespace WebApplication1.Controllers
+﻿namespace WebApplication1.Controllers
 {
-  public class FilesController : ApiController
+  using NewDurnit;
+  using System;
+  using System.Linq;
+  using System.Web;
+  using System.Web.Mvc;
+  using WebApplication1.Models;
+
+  [RoutePrefix("files")]
+  public class FilesController : Controller
   {
-    private FileDictionary fileDictionary = FileDictionary.Instance;
+    FileDictionary fileDictionary = FileDictionary.Instance;
 
-    //public FilesController()
-    //{
-    //  Client client = new Client(args[0], "2020");
-    //  client.StoreFile(File.OpenRead(@"C:\Users\Elijah Segura\Desktop\testingText.txt"));
-    //  byte[] array = client.GetFile(@"testingText.txt");
-    //  File.WriteAllBytes(@"C:\Users\Elijah Segura\Desktop\RECEIVED.txt", array);
-
-    //}
-    // GET api/values
-    public IEnumerable<string> Get()
+    // GET /files
+    [HttpGet]
+    [Route("")]
+    public ActionResult GetAll()
     {
-      return fileDictionary.GetAllFiles();
-      //Client client = new Client("localhost", "2020");
-      //client.GetFile("");
-      //return new string[] { "value1", "value2" };
+      return Json(fileDictionary.GetAllFiles().ToList(), JsonRequestBehavior.AllowGet);
     }
 
-    // GET api/values/5
-    public string Get(string file)
+    // GET /files/filename
+    [HttpGet]
+    [Route("{filename}")]
+    public FileResult GetByFilename(string filename)
     {
-      var path = fileDictionary.GetFilePath(file);
+      var file = fileDictionary.GetFile(filename);
       Client client = new Client("localhost", "2020");
-      byte[] array = client.GetFile(path);
-      return array.ToString();
+      byte[] array = client.GetFile(file.FileId + ".txt");
+      return new FileContentResult(array, file.ContentType);
     }
 
-    // POST api/values
-    public void Post([FromBody]string value, string file)
+    // POST /files/filename
+    [HttpPost]
+    [Route("{filename}")]
+    public ActionResult Create(string filename, HttpPostedFileBase upload)
     {
-      Guid id = Guid.NewGuid();
-      var filePath = $@"C:\_\temp\{id}.txt";
-      fileDictionary.Add(file, $"{id}.txt");
+      // http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files
+      try
+      {
+        if (ModelState.IsValid)
+        {
+          if (upload != null && upload.ContentLength > 0)
+          {
+            Guid id = Guid.NewGuid();
+            var filePath = $@"C:\_\temp\{id}.txt";
 
-      File.WriteAllText(filePath, value);
-      Client client = new Client("localhost", "2020");
-      client.StoreFile(File.OpenRead(filePath));
+            var file = new FileObject
+            {
+              FileId = id,
+              FileName = filename,
+              FilePath = filePath,
+              ContentType = upload.ContentType
+            };
+            using (var reader = new System.IO.BinaryReader(upload.InputStream))
+            {
+              file.Content = reader.ReadBytes(upload.ContentLength);
+            }
+
+            fileDictionary.Add(filename, file);
+            System.IO.File.WriteAllBytes(filePath, file.Content);
+            Client client = new Client("localhost", "2020");
+            client.StoreFile(System.IO.File.OpenRead(filePath));
+          }
+        }
+      }
+      catch (Exception)
+      {
+        throw;
+      }
+      return RedirectToAction("index", "home", null);
     }
 
   }
