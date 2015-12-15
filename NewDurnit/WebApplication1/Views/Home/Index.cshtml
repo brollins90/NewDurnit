@@ -1,33 +1,6 @@
 ﻿<div ng-app="myApp" ng-controller="myCtrl">
     <h1>Manage your files!</h1>
 
-<div style="border:solid red 2px;">
-    <div class="row">
-    @using (Html.BeginForm("Post", "Files", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.Label("FileName", new { @class = "control-label col-md-2" })
-                    <input type="text" id="FileName" name="filename" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.Label("Blake", new { @class = "control-label col-md-2" })
-                    <input type="file" id="Blake" name="upload" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-    </div>
-    </div>
-
     <div style="border:solid grey 1px; margin:25px, 0; margin-bottom:25px; padding:15px;">
         <h3>View Your Files</h3>
         <select ng-model='selectedFile' ng-options='file for file in files'></select>
@@ -40,9 +13,32 @@
     
     <div  style="border:solid grey 1px; margin:25px, 0; padding:15px;">
         <h3>Upload A New File</h3>
-        <input type="file" id="file" name="file" />
+
+        @using (Html.BeginForm("Post", "Files", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-10" style="display:none;">
+                        @Html.Label("FileName", new { @class = "control-label col-md-2" })
+                        <input type="text" id="FileName" name="filename"  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.Label("Select", new { @class = "control-label col-md-2" })
+                        <input type="file" id="Blake" name="upload" fd-input />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+       <!-- <input type="file" id="file" name="file" />
         <br>
-        <button ng-click="addFile()">Upload File</button>
+        <button ng-click="addFile()">Upload File</button> --> 
     </div>
 
     <script>
@@ -52,6 +48,23 @@
             return window.encodeURIComponent;
         });
 
+
+        
+        myApp.directive('fdInput', ['$timeout', function ($timeout, $scope) {
+            
+           
+            return {
+                link: function (scope, element, attrs) {
+                    element.on('change', function  (evt) {
+                        var files = evt.target.files;
+                        console.log(files[0].name);
+                        document.getElementById('FileName').value = files[0].name;
+                        //$scope.fileName = files[0].name;
+                    });
+                }
+            }
+        }]);
+
     myApp.controller('myCtrl', function ($scope, $http) {
 
         //get file list
@@ -60,34 +73,7 @@
                     console.log(response.data);
                     $scope.files = response.data;
                 });
-
-        uploadUrl = "http://localhost:27516/files/post?name="
-        $scope.data = 'none';
-
-        //upload a file
-        $scope.addFile = function () {
-            var f = document.getElementById('file').files[0],
-                    r = new FileReader();
-            r.onloadend = function (e) {
-                $scope.data = e.target.result;
-            }
-            uploadUrl += encodeURIComponent(document.getElementById('file').files[0].name);
-            console.log(uploadUrl);
-            r.readAsBinaryString(f);
-
-            $http.post(uploadUrl, r, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-
-                    .success(function(){
-                        alert('success');
-                    })
-
-                    .error(function(){
-                        alert('error');
-                    });
-        }
+            
       })
     </script>
 </div>
