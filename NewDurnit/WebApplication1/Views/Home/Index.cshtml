@@ -30,10 +30,10 @@
 
     <div style="border:solid grey 1px; margin:25px, 0; margin-bottom:25px; padding:15px;">
         <h3>View Your Files</h3>
-        <select ng-model='selectedFile' ng-options='file.Name for file in files'></select>
+        <select ng-model='selectedFile' ng-options='file for file in files'></select>
         <div>
             <h3>
-              <a target="_self" href="http://localhost:27516/files/{{selectedFile.Name | encodeURIComponent}}" download="{{selectedFile.name}}">Download Selected File</a>
+              <a target="_self" href="http://localhost:27516/files/{{selectedFile | encodeURIComponent}}" download="{{selectedFile.name}}">Download Selected File</a>
             </h3>
         </div>
     </div>
@@ -54,9 +54,11 @@
 
     myApp.controller('myCtrl', function ($scope, $http) {
 
+        //get file list
         $http.get("http://localhost:27516/Files")
                 .then(function (response) {
-                    $scope.files = response.data.records;
+                    console.log(response.data);
+                    $scope.files = response.data;
                 });
 
         uploadUrl = "http://localhost:27516/files/post?name="
